@@ -118,7 +118,7 @@ function backdrop(c,w,h,scale,cs,sn){
  if(!skyAtlas || skyAspect!==aspect){
   skyAspect=aspect;
   skyAtlas=document.createElement('canvas');
-  const aw=skyAtlas.width=Math.max(2,Math.ceil(w/4)), ah=skyAtlas.height=768;
+  const aw=skyAtlas.width=Math.max(2,Math.ceil(w/2)), ah=skyAtlas.height=1536;
   const brush=skyAtlas.getContext('2d'), pixels=brush.createImageData(aw,ah);
   const tw=panorama.width,th=panorama.height;
   for(let row=0;row<ah;row++){
