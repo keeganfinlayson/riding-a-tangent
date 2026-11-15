@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Riding a Tangent · v1.9</title><style>
+<!DOCTYPE html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Riding a Tangent · v1.10</title><style>
 *{box-sizing:border-box}body{margin:0;background:#091d2c;color:#fff6df;font:15px system-ui}main{height:100svh;min-height:450px;display:grid;grid-template-rows:repeat(2,minmax(0,1fr)) auto}header{display:grid;place-items:center;position:relative;border-bottom:1px solid #68838b}h1{font:normal clamp(24px,3vw,34px) Georgia;margin:0}button,select,input{color:inherit;background:#173548;border:1px solid #69818a;border-radius:7px;padding:9px;font:inherit}button,select{cursor:pointer}button[aria-pressed=true],#play{background:#e9cf92;color:#172c36}#help{position:absolute;top:8px;z-index:2;right:15px;border-radius:50%;padding:3px;width:30px;height:30px}section{position:relative;overflow:hidden}canvas{width:100%;height:100%;display:block}#bow{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:min(41%,420px);height:35%;object-fit:fill;pointer-events:none}#graph{touch-action:none;cursor:grab;border-block:1px solid #55717b}#graph:active{cursor:grabbing}footer{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:12px}label{display:inline-flex;align-items:center;gap:7px}input[type=checkbox]{accent-color:#e9c573;width:18px;height:18px}.group{display:flex}.group button{border-radius:0}.group button:first-child{border-radius:7px 0 0 7px}.group button:last-child{border-radius:0 7px 7px 0}dialog{color:#fff6df;background:#112c3b;border:1px solid #77969e;border-radius:12px;max-width:min(420px,90vw)}dialog::backdrop{background:#07162499}dialog label{margin:5px 0;width:100%;justify-content:space-between}dialog input{width:65%}#status{position:absolute;left:12px;top:8px;background:#102839df;border-radius:5px;padding:4px 8px}#status:empty{display:none}@media(max-width:650px){footer{gap:7px;padding:7px;font-size:13px}footer button,select{padding:8px}#bow{width:60%}}
 .hood{position:absolute;bottom:-8%;left:20%;width:60%;height:16%;border-radius:50% 50% 0 0;background:linear-gradient(#ed8070,#bd3935 24%,#871f27);border-top:2px solid #ffae92;pointer-events:none}#coords{position:absolute;top:5px;right:10px;background:#fffaf0df;color:#30445a;padding:3px 6px;border-radius:4px;font:13px monospace}nav{position:absolute;left:8px;bottom:8px;display:flex;gap:4px}nav button{padding:5px 10px;font-size:14px}#graph.panning{cursor:move}#editor{position:fixed;z-index:5;inset:50% auto auto 50%;transform:translate(-50%,-50%);background:#112c3b;color:white;padding:18px;border:1px solid #78909c;border-radius:10px;width:min(390px,94vw);max-height:90svh;overflow:auto;box-shadow:0 8px 40px #0006}#editor label{display:flex;justify-content:space-between;margin:8px 0}#editor input{width:68%} .hood::after{content:"";position:absolute;left:50%;top:-9px;width:16px;height:9px;transform:translateX(-50%);background:linear-gradient(90deg,#475760,#f6fcff,#61747e);clip-path:polygon(38% 0,62% 0,70% 60%,100% 79%,100% 100%,0 100%,0 79%,30% 60%)}.hood::before{content:"×";position:absolute;left:50%;top:-31px;transform:translateX(-50%);box-sizing:border-box;width:25px;height:25px;border:3px solid #bacbd5;border-radius:50%;display:grid;place-items:center;color:#eff6fa;background:#52626d;font:bold 22px/18px Arial;text-shadow:0 1px 1px #263843;box-shadow:0 0 0 1px #35434a}footer{gap:7px;padding:7px}footer input{min-width:0;width:5em;padding:6px}#expr{width:clamp(90px,16vw,220px)}#curve-fields{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}#err:empty{display:none}#dash{position:absolute;right:8px;bottom:5px;display:grid;grid-template-columns:auto auto;gap:1px 7px;padding:5px 8px;border:1px solid #68818a;border-radius:5px;background:#102331ef;color:#ecf3f1;font:12px monospace;font-variant-numeric:tabular-nums}#dash output{text-align:right;min-width:7ch}footer label{gap:3px}#dash{right:auto;left:50%;bottom:0;transform:translateX(-50%);grid-template-columns:repeat(4,auto 6.6ch);gap:0 5px;align-items:center;padding:5px 17px 3px;border:2px solid #47525b;border-bottom:0;border-radius:17px 17px 0 0;background:linear-gradient(#17222b,#091117);box-shadow:0 -3px 0 #303c43,0 -4px 0 #697379;font-size:clamp(10px,1.2vw,13px);color:#c1e9de}#dash output{min-width:0}#dash span{color:#91adae}.cockpit{position:absolute;bottom:0;width:100%;height:12px;border-top:2px solid #535f65;background:linear-gradient(#343e45,#172029);pointer-events:none}.hood{margin-bottom:12px}#dash{grid-template-columns:repeat(4,auto auto)}#dash output{min-width:5ch}section:has(#sea){--cluster:clamp(48px,7.6svh,72px)}
 .hood{left:8%;width:84%;height:calc(18% + var(--pitch,0%));bottom:calc(var(--cluster) - 13px);margin:0;border-radius:50% 50% 5% 5% / 76% 76% 10% 10%;background:linear-gradient(100deg,transparent 18%,#ffd8c63b 22%,transparent 26%,transparent 74%,#ffd8c636 78%,transparent 82%),linear-gradient(#ed7460,#b63532 46%,#751d26);box-shadow:inset 0 2px 2px #ffe0bf55}
@@ -17,7 +17,7 @@
 #blind{position:absolute;inset:0;background:#10171d;opacity:0;visibility:hidden;pointer-events:none}#blind.active{opacity:1;visibility:visible}#help{z-index:3}#dash{width:clamp(320px,54%,680px);max-width:96%;height:17%;min-height:42px}#dash .dial>span{color:#faf2dd;font:700 clamp(15px,1.55vw,21px)/1.05 Georgia,serif}#dash output{display:flex;align-items:baseline;justify-content:center;font-size:clamp(12px,1.4vw,19px);line-height:1.1}#dash output b{display:inline-block;width:6ch;text-align:right;white-space:pre;font:inherit;color:#d6fff1}#dash output small{display:inline-block;width:5ch;text-align:left;padding-left:1px;font:600 .67em monospace;color:#a6dfcf}@media(max-width:550px){#dash{width:94%}}#roadFade{position:absolute;inset:0;background:#10171d;opacity:0;pointer-events:none}#dash{bottom:3.5%} .release-version{position:fixed;top:8px;left:12px;z-index:10;font:600 12px system-ui,sans-serif;color:#fff6df;background:#112c3b;padding:5px 9px;border-radius:6px;pointer-events:none}#dash{background:linear-gradient(#141d22,#354046 40%,#161d21);border:3px solid #293338;border-top-color:#566169;border-radius:15px 15px 6px 6px;box-shadow:0 -4px 0 #20292e,0 -5px 0 #758087,inset 0 2px 4px #060b0e}
 #dash .dial{background:linear-gradient(155deg,#192d30,#071317 68%);box-shadow:inset 0 2px 3px #060c10}
 #dash output b svg{width:100%;height:1.13em;vertical-align:middle;fill:#a6ffdc}
-</style><main><span class="release-version">v1.9</span><section><button id="help" aria-label="Help">?</button><canvas id="sea" aria-label="Forward view from the car"></canvas><div id="roadFade" aria-hidden="true"></div><svg style="overflow:visible" id="interior" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+</style><main><span class="release-version">v1.10</span><section><button id="help" aria-label="Help">?</button><canvas id="sea" aria-label="Forward view from the car"></canvas><div id="roadFade" aria-hidden="true"></div><svg style="overflow:visible" id="interior" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
 <defs>
 <linearGradient id="paint" x2=".13" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#f89178"/><stop offset=".27" stop-color="#c8473d"/><stop offset=".72" stop-color="#952c30"/><stop offset="1" stop-color="#542028"/></linearGradient>
 <linearGradient id="trim" x2=".1" y2="1"><stop stop-color="#889298"/><stop offset=".12" stop-color="#434e55"/><stop offset=".6" stop-color="#263039"/><stop offset="1" stop-color="#10171e"/></linearGradient>
@@ -195,10 +195,11 @@ function forward(g){
  // On this vertical plane, horizontal distance from the vanishing point is
  // proportional to inverse eye depth, even while the camera pitches.
  const mid=w/2, wallReach=scale*half/span;
- const wall=c.createLinearGradient(mid,0,mid-wallReach*5,0);
- wall.addColorStop(0,'rgba(166,185,197,0)');
- wall.addColorStop(.14,'rgba(185,199,206,.75)');
- wall.addColorStop(.36,'rgba(224,228,225,.80)');wall.addColorStop(1,'rgba(245,242,233,.82)');
+ const wall=c.createLinearGradient(mid,0,mid-wallReach*10,0);
+ for(let k=0;k<=16;k++){
+  const t=k/16;
+  wall.addColorStop(t,'rgba(237,236,227,'+(.82*t*t*(3-2*t))+')');
+ }
  c.fillStyle=wall;c.fillRect(0,0,mid,h);
  function gridLine(t1,y1,t2,y2,value){
   const depth=depthAt,limit=span*.0001;
@@ -230,12 +231,13 @@ function forward(g){
    const dx=-(p[0]-mid)*dz,dy=-scale*up-(p[1]-h*.49)*dz;
    const gap=Math.abs(dx*(v[1]-u[1])-dy*(v[0]-u[0]))/length*inv*step/pixelRatio;
    const fade=Math.min(1,Math.max(0,((major?5:1)*gap-1)/4));
-   const haze=Math.min(1,Math.max(0,inv*span*.7));
+   const depthFade=Math.min(1,Math.max(0,(inv*span-.55)/3));
+   const haze=depthFade*depthFade*(3-2*depthFade);
    const depth=1/Math.max(inv,1e-14),cameraUp=(h*.49-p[1])*depth/scale;
    const ahead=(eyeX-x)+depth*cs-cameraUp*sn;
    const elevation=(eyeY-baseHeight)+depth*sn+cameraUp*cs;
-   const edge=Math.max(0,Math.min(1,(ahead+span*.12)/(span*.07),(span*1.65-ahead)/(span*.38),
-    (49.5-Math.abs(elevation/step))/12));
+   const edge=Math.max(0,Math.min(1,(ahead+span*.12)/(span*.12),(span*1.65-ahead)/(span*.85),
+    (49-Math.abs(elevation/step))/30));
    ink.addColorStop(j/stops,'rgba('+rgb+','+edge*edge*(3-2*edge)*haze*(axis?1:fade*(major?.8:.6))+')');
   }
   shape([a,b],ink,false,(axis?2.5:major?1.35:1)*pixelRatio);
@@ -272,7 +274,7 @@ function forward(g){
   const a=road[Math.max(0,i-1)],b=road[Math.min(road.length-1,i+1)];
   const dx=b-a,dy=height(b)-height(a),len=Math.hypot(dx,dy)||1,y=height(t);
   const raised=h=>project(t-h*dy/len,y+h*dx/len,cableEdge);
-  return [raised(span*.016),raised(span*.039)];
+  return [raised(span*.012),raised(span*.029)];
  });
  for(let i=road.length-1;i>0;i--){let u=road[i-1],v=road[i],y=height(u),z=height(v);
  const du=depthAt(u,y),dv=depthAt(v,z),limit=span*.0001;
@@ -323,7 +325,7 @@ function forward(g){
    const angle=n*Math.PI/5,tangent=r*Math.cos(angle);
    return project(marker+dx*h+dy*tangent,base+dy*h-dx*tangent,edge+r*Math.sin(angle));
   });
-  const levels=[0,.002,.043,.045,.051,.052],rings=levels.map((h,n)=>ring(span*h,width*(n===0?1.3:n===5?.88:1)));
+  const levels=[0,.002,.032,.034,.038,.039],rings=levels.map((h,n)=>ring(span*h,width*(n===0?1.3:n===5?.88:1)));
   const faces=Array.from({length:10},(_,n)=>n);
   faces.sort((a,b)=>Math.cos((b+.5)*Math.PI/5)-Math.cos((a+.5)*Math.PI/5));
   for(const n of faces){
