@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Riding a Tangent · v1.6</title><style>
+<!DOCTYPE html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Riding a Tangent · v1.7</title><style>
 *{box-sizing:border-box}body{margin:0;background:#091d2c;color:#fff6df;font:15px system-ui}main{height:100svh;min-height:450px;display:grid;grid-template-rows:repeat(2,minmax(0,1fr)) auto}header{display:grid;place-items:center;position:relative;border-bottom:1px solid #68838b}h1{font:normal clamp(24px,3vw,34px) Georgia;margin:0}button,select,input{color:inherit;background:#173548;border:1px solid #69818a;border-radius:7px;padding:9px;font:inherit}button,select{cursor:pointer}button[aria-pressed=true],#play{background:#e9cf92;color:#172c36}#help{position:absolute;top:8px;z-index:2;right:15px;border-radius:50%;padding:3px;width:30px;height:30px}section{position:relative;overflow:hidden}canvas{width:100%;height:100%;display:block}#bow{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:min(41%,420px);height:35%;object-fit:fill;pointer-events:none}#graph{touch-action:none;cursor:grab;border-block:1px solid #55717b}#graph:active{cursor:grabbing}footer{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:12px}label{display:inline-flex;align-items:center;gap:7px}input[type=checkbox]{accent-color:#e9c573;width:18px;height:18px}.group{display:flex}.group button{border-radius:0}.group button:first-child{border-radius:7px 0 0 7px}.group button:last-child{border-radius:0 7px 7px 0}dialog{color:#fff6df;background:#112c3b;border:1px solid #77969e;border-radius:12px;max-width:min(420px,90vw)}dialog::backdrop{background:#07162499}dialog label{margin:5px 0;width:100%;justify-content:space-between}dialog input{width:65%}#status{position:absolute;left:12px;top:8px;background:#102839df;border-radius:5px;padding:4px 8px}#status:empty{display:none}@media(max-width:650px){footer{gap:7px;padding:7px;font-size:13px}footer button,select{padding:8px}#bow{width:60%}}
 .hood{position:absolute;bottom:-8%;left:20%;width:60%;height:16%;border-radius:50% 50% 0 0;background:linear-gradient(#ed8070,#bd3935 24%,#871f27);border-top:2px solid #ffae92;pointer-events:none}#coords{position:absolute;top:5px;right:10px;background:#fffaf0df;color:#30445a;padding:3px 6px;border-radius:4px;font:13px monospace}nav{position:absolute;left:8px;bottom:8px;display:flex;gap:4px}nav button{padding:5px 10px;font-size:14px}#graph.panning{cursor:move}#editor{position:fixed;z-index:5;inset:50% auto auto 50%;transform:translate(-50%,-50%);background:#112c3b;color:white;padding:18px;border:1px solid #78909c;border-radius:10px;width:min(390px,94vw);max-height:90svh;overflow:auto;box-shadow:0 8px 40px #0006}#editor label{display:flex;justify-content:space-between;margin:8px 0}#editor input{width:68%} .hood::after{content:"";position:absolute;left:50%;top:-9px;width:16px;height:9px;transform:translateX(-50%);background:linear-gradient(90deg,#475760,#f6fcff,#61747e);clip-path:polygon(38% 0,62% 0,70% 60%,100% 79%,100% 100%,0 100%,0 79%,30% 60%)}.hood::before{content:"×";position:absolute;left:50%;top:-31px;transform:translateX(-50%);box-sizing:border-box;width:25px;height:25px;border:3px solid #bacbd5;border-radius:50%;display:grid;place-items:center;color:#eff6fa;background:#52626d;font:bold 22px/18px Arial;text-shadow:0 1px 1px #263843;box-shadow:0 0 0 1px #35434a}footer{gap:7px;padding:7px}footer input{min-width:0;width:5em;padding:6px}#expr{width:clamp(90px,16vw,220px)}#curve-fields{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}#err:empty{display:none}#dash{position:absolute;right:8px;bottom:5px;display:grid;grid-template-columns:auto auto;gap:1px 7px;padding:5px 8px;border:1px solid #68818a;border-radius:5px;background:#102331ef;color:#ecf3f1;font:12px monospace;font-variant-numeric:tabular-nums}#dash output{text-align:right;min-width:7ch}footer label{gap:3px}#dash{right:auto;left:50%;bottom:0;transform:translateX(-50%);grid-template-columns:repeat(4,auto 6.6ch);gap:0 5px;align-items:center;padding:5px 17px 3px;border:2px solid #47525b;border-bottom:0;border-radius:17px 17px 0 0;background:linear-gradient(#17222b,#091117);box-shadow:0 -3px 0 #303c43,0 -4px 0 #697379;font-size:clamp(10px,1.2vw,13px);color:#c1e9de}#dash output{min-width:0}#dash span{color:#91adae}.cockpit{position:absolute;bottom:0;width:100%;height:12px;border-top:2px solid #535f65;background:linear-gradient(#343e45,#172029);pointer-events:none}.hood{margin-bottom:12px}#dash{grid-template-columns:repeat(4,auto auto)}#dash output{min-width:5ch}section:has(#sea){--cluster:clamp(48px,7.6svh,72px)}
 .hood{left:8%;width:84%;height:calc(18% + var(--pitch,0%));bottom:calc(var(--cluster) - 13px);margin:0;border-radius:50% 50% 5% 5% / 76% 76% 10% 10%;background:linear-gradient(100deg,transparent 18%,#ffd8c63b 22%,transparent 26%,transparent 74%,#ffd8c636 78%,transparent 82%),linear-gradient(#ed7460,#b63532 46%,#751d26);box-shadow:inset 0 2px 2px #ffe0bf55}
@@ -14,19 +14,26 @@
 #dash .dial{gap:1px;border-color:#36434b;background:linear-gradient(#10191e,#18262c)}
 #dash span{font-size:clamp(10px,1.1vw,15px)}#dash output{font-size:clamp(12px,1.55vw,20px)}
 @media(max-width:650px){#dash{width:59%;bottom:0}#dash output{font-size:clamp(10px,2.6vw,15px)}}
-#blind{position:absolute;inset:0;background:#10171d;opacity:0;visibility:hidden;pointer-events:none}#blind.active{opacity:1;visibility:visible}#help{z-index:3}#dash{width:clamp(320px,54%,680px);max-width:96%;height:17%;min-height:42px}#dash .dial>span{color:#faf2dd;font:700 clamp(15px,1.55vw,21px)/1.05 Georgia,serif}#dash output{display:flex;align-items:baseline;justify-content:center;font-size:clamp(12px,1.4vw,19px);line-height:1.1}#dash output b{display:inline-block;width:6ch;text-align:right;white-space:pre;font:inherit;color:#d6fff1}#dash output small{display:inline-block;width:5ch;text-align:left;padding-left:1px;font:600 .67em monospace;color:#a6dfcf}@media(max-width:550px){#dash{width:94%}}#roadFade{position:absolute;inset:0;background:#10171d;opacity:0;pointer-events:none}#dash{bottom:3.5%} .release-version{position:fixed;top:8px;left:12px;z-index:10;font:600 12px system-ui,sans-serif;color:#fff6df;background:#112c3b;padding:5px 9px;border-radius:6px;pointer-events:none}</style><main><span class="release-version">v1.6</span><section><button id="help" aria-label="Help">?</button><canvas id="sea" aria-label="Forward view from the car"></canvas><div id="roadFade" aria-hidden="true"></div><svg style="overflow:visible" id="interior" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+#blind{position:absolute;inset:0;background:#10171d;opacity:0;visibility:hidden;pointer-events:none}#blind.active{opacity:1;visibility:visible}#help{z-index:3}#dash{width:clamp(320px,54%,680px);max-width:96%;height:17%;min-height:42px}#dash .dial>span{color:#faf2dd;font:700 clamp(15px,1.55vw,21px)/1.05 Georgia,serif}#dash output{display:flex;align-items:baseline;justify-content:center;font-size:clamp(12px,1.4vw,19px);line-height:1.1}#dash output b{display:inline-block;width:6ch;text-align:right;white-space:pre;font:inherit;color:#d6fff1}#dash output small{display:inline-block;width:5ch;text-align:left;padding-left:1px;font:600 .67em monospace;color:#a6dfcf}@media(max-width:550px){#dash{width:94%}}#roadFade{position:absolute;inset:0;background:#10171d;opacity:0;pointer-events:none}#dash{bottom:3.5%} .release-version{position:fixed;top:8px;left:12px;z-index:10;font:600 12px system-ui,sans-serif;color:#fff6df;background:#112c3b;padding:5px 9px;border-radius:6px;pointer-events:none}#dash{background:linear-gradient(#141d22,#354046 40%,#161d21);border:3px solid #293338;border-top-color:#566169;border-radius:15px 15px 6px 6px;box-shadow:0 -4px 0 #20292e,0 -5px 0 #758087,inset 0 2px 4px #060b0e}
+#dash .dial{background:linear-gradient(155deg,#192d30,#071317 68%);box-shadow:inset 0 2px 3px #060c10}
+#dash output b svg{width:100%;height:1.13em;vertical-align:middle;fill:#a6ffdc}
+</style><main><span class="release-version">v1.7</span><section><button id="help" aria-label="Help">?</button><canvas id="sea" aria-label="Forward view from the car"></canvas><div id="roadFade" aria-hidden="true"></div><svg style="overflow:visible" id="interior" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
 <defs>
 <linearGradient id="paint" x2=".13" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#f89178"/><stop offset=".27" stop-color="#c8473d"/><stop offset=".72" stop-color="#952c30"/><stop offset="1" stop-color="#542028"/></linearGradient>
 <linearGradient id="trim" x2=".1" y2="1"><stop stop-color="#889298"/><stop offset=".12" stop-color="#434e55"/><stop offset=".6" stop-color="#263039"/><stop offset="1" stop-color="#10171e"/></linearGradient>
 <linearGradient id="dashskin" x2="0" y2="1"><stop stop-color="#59636b"/><stop offset=".1" stop-color="#414c54"/><stop offset=".56" stop-color="#252f36"/><stop offset=".62" stop-color="#758087"/><stop offset=".65" stop-color="#353e46"/><stop offset="1" stop-color="#172027"/></linearGradient>
 <linearGradient id="rubber" x2=".7" y2="1"><stop stop-color="#5c646b"/><stop offset=".4" stop-color="#323a41"/><stop offset="1" stop-color="#171d21"/></linearGradient>
 </defs>
-<g id="bonnet"><path d="M-25 380 Q28 313 176 298 Q321 277 500 278 Q679 277 824 298 Q971 314 1025 380 L1040 430 H-40Z" fill="url(#paint)" stroke="#dc7665" stroke-width="2"/>
+<defs><pattern id="leatherGrain" width="6" height="5" patternUnits="userSpaceOnUse"><path d="m0 2 2-1m2 3 1-1" stroke="#abb3b4" stroke-width=".65" opacity=".25"/></pattern></defs><g id="bonnet"><path d="M-25 380 Q28 313 176 298 Q321 277 500 278 Q679 277 824 298 Q971 314 1025 380 L1040 430 H-40Z" fill="url(#paint)" stroke="#dc7665" stroke-width="2"/>
 <path d="M186 350 Q249 304 334 287 M814 350 Q751 304 666 287" fill="none" stroke="#ef947f" opacity=".64" stroke-width="2"/>
-<g transform="translate(500 277)" stroke-linejoin="round"><path d="M-7 1 H7 L2 -3 V-8 H-2 V-3Z" fill="#96a2a6" stroke="#475960"/><circle cy="-18" r="11" fill="#293b45" stroke="#d6e1e4" stroke-width="3"/><path d="m-5 -23 10 10 m0 -10 -10 10" stroke="#edf0ed" stroke-width="2.6"/></g></g>
+<path d="M68 342 Q157 301 326 288 Q208 303 163 332Z M932 342 Q843 301 674 288 Q792 303 837 332Z" fill="#ffd2b5" opacity=".14"/>
+<path d="M189 349 Q248 305 334 288 M811 349 Q752 305 666 288" fill="none" stroke="#692328" stroke-width="1.4"/>
+<g id="ornament" transform="translate(500 277)" stroke-linejoin="round"><path d="M-7 1 H7 L2 -3 V-8 H-2 V-3Z" fill="#96a2a6" stroke="#475960"/><circle cy="-18" r="11" fill="#293b45" stroke="#d6e1e4" stroke-width="3"/><path d="m-5 -23 10 10 m0 -10 -10 10" stroke="#edf0ed" stroke-width="2.6"/></g></g>
 <path d="M0 -20 H19 L21 0 Q43 164 119 333 L65 371 H0Z M1000 -20 H981 L979 0 Q957 164 881 333 L935 371 H1000Z" fill="url(#trim)" stroke="#141c22" stroke-width="3"/>
 <path d="M0 327 Q112 304 254 318 Q502 339 764 318 Q901 307 1000 327 V430 H0Z" fill="#151d23"/>
 <path d="M0 339 Q108 316 245 328 Q503 347 765 328 Q890 317 1000 339 V430 H0Z" fill="url(#dashskin)"/>
+<path d="M0 339 Q108 316 245 328 Q503 347 765 328 Q890 317 1000 339 V430 H0Z" fill="url(#leatherGrain)"/>
+<path d="M8 347 Q108 323 245 335 M755 335 Q892 323 992 347" fill="none" stroke="#9d9a90" stroke-width="1.1" stroke-dasharray="4 3"/>
 <path d="M207 395 Q235 377 264 350 Q284 330 325 330 H675 Q716 330 736 350 Q764 378 793 395" fill="#28323a" stroke="#626b71" stroke-width="3"/>
 <g stroke="#141c21" stroke-width="4"><path d="M777 347 l109 -6 m-104 12 102 -6 m-95 12 91 -6"/></g>
 <g transform="translate(126 433) rotate(-8)"><ellipse rx="91" ry="76" fill="none" stroke="#141a1f" stroke-width="22"/><ellipse rx="91" ry="76" fill="none" stroke="url(#rubber)" stroke-width="16"/><path d="M-79 -24 L-36 -7 Q0 -23 37 -7 L78 -25 L66 -8 L32 12 H-32 L-65 -7Z" fill="#6c767d" stroke="#222b32" stroke-width="3"/></g>
@@ -173,6 +180,9 @@ function forward(g){
  const hood=$('bonnet');
  hood.setAttribute('transform','translate(0 '+(350-6*load)+') scale(1 '+pitchDepth+') translate(0 -350)');
  
+ const interior=$('interior');
+ const aspectCorrection=2.5*interior.clientHeight*pitchDepth/Math.max(1,interior.clientWidth);
+ $('ornament').setAttribute('transform','translate(500 277) scale('+aspectCorrection+' 1)');
  const baseHeight=f(x),normalLength=Math.hypot(1,grade);
  // Maintain eye clearance perpendicular to the road, including near-vertical grades.
  const eyeX=x-eye*grade/normalLength,eyeY=baseHeight+eye/normalLength;
@@ -187,8 +197,8 @@ function forward(g){
  const mid=w/2, wallReach=scale*half/span;
  const wall=c.createLinearGradient(mid,0,mid-wallReach*5,0);
  wall.addColorStop(0,'rgba(166,185,197,0)');
- wall.addColorStop(.14,'rgba(185,199,206,.8)');
- wall.addColorStop(.36,'rgba(224,228,225,.86)');wall.addColorStop(1,'rgba(245,242,233,.88)');
+ wall.addColorStop(.14,'rgba(185,199,206,.75)');
+ wall.addColorStop(.36,'rgba(224,228,225,.80)');wall.addColorStop(1,'rgba(245,242,233,.82)');
  c.fillStyle=wall;c.fillRect(0,0,mid,h);
  function gridLine(t1,y1,t2,y2,value){
   const depth=depthAt,limit=span*.0001;
@@ -262,7 +272,7 @@ function forward(g){
   const a=road[Math.max(0,i-1)],b=road[Math.min(road.length-1,i+1)];
   const dx=b-a,dy=height(b)-height(a),len=Math.hypot(dx,dy)||1,y=height(t);
   const raised=h=>project(t-h*dy/len,y+h*dx/len,cableEdge);
-  return [raised(span*.0045),raised(span*.0088)];
+  return [raised(span*.008),raised(span*.017)];
  });
  for(let i=road.length-1;i>0;i--){let u=road[i-1],v=road[i],y=height(u),z=height(v);
  const du=depthAt(u,y),dv=depthAt(v,z),limit=span*.0001;
@@ -292,8 +302,15 @@ function forward(g){
  band(left,left+.0015*span,'#4086cc');band(half-.0015*span,half,'#efece0');
  if(Math.floor((u+v)/2/(span*.027))%2===0)band(-span*.0009,span*.0009,'#fff2ca');
  for(let k=0;k<2;k++){
-  shape([cables[i-1][k],cables[i][k]],'#596972',false,
-   Math.max(.85,Math.min(6,scale*span*.00056/Math.max(limit,(du+dv)/2))));
+  const ends=[cables[i-1][k],cables[i][k]];
+  const width=Math.max(.85,Math.min(8,scale*span*.00075/Math.max(limit,(du+dv)/2)));
+  shape(ends,'#38464b',false,width);
+  if(width>1.5){
+   shape(ends,'#a0adb0',false,width*.48);
+   c.setLineDash([width*.48,width*1.8]);
+   c.lineDashOffset=station*scale/Math.max(limit,du);
+   shape(ends,'#5e6a70',false,width*.62);c.setLineDash([]);c.lineDashOffset=0;
+  }
  }
  // Fixed roadside reflectors provide near-field parallax against the distant valley.
  const spacing=span*.085, distance=Math.ceil(station/spacing)*spacing-station;
@@ -301,12 +318,22 @@ function forward(g){
   const fraction=distance/extent,marker=u+fraction*run,base=y+fraction*rise;
   const normal=Math.hypot(run,rise),dx=-rise/normal,dy=run/normal;
   const edge=half-span*.0025, width=span*.0018;
-  const corner=(h,side)=>project(marker+dx*h,base+dy*h,side);
-  const post=(lo,hi,color)=>shape([corner(lo,edge-width),corner(lo,edge+width),
-   corner(hi,edge+width),corner(hi,edge-width)],color,true);
-  post(0,span*.013,'#384951');
-  post(span*.010,span*.0126,'#e7a33d');
-  post(span*.0122,span*.0126,'#ffe2a1');
+  // Rings lie in the road's tangent/lateral plane; the post rises along its normal.
+  const ring=(h,r)=>Array.from({length:10},(_,n)=>{
+   const angle=n*Math.PI/5,tangent=r*Math.cos(angle);
+   return project(marker+dx*h+dy*tangent,base+dy*h-dx*tangent,edge+r*Math.sin(angle));
+  });
+  const levels=[0,.002,.019,.020,.024,.025],rings=levels.map((h,n)=>ring(span*h,width*(n===0?1.3:n===5?.88:1)));
+  const faces=Array.from({length:10},(_,n)=>n);
+  faces.sort((a,b)=>Math.cos((b+.5)*Math.PI/5)-Math.cos((a+.5)*Math.PI/5));
+  for(const n of faces){
+   const next=(n+1)%10,light=Math.round(25*(1+Math.cos((n+.5)*Math.PI/5+2.3)));
+   for(let layer=0;layer<5;layer++){
+    const tone=layer===3?[168+light,104+light,30+light/2]:[32+light,42+light,48+light];
+    shape([rings[layer][n],rings[layer][next],rings[layer+1][next],rings[layer+1][n]],'rgb('+tone.join(',')+')',true);
+   }
+  }
+  shape(rings[5],'#89979c',true);
  }
  }
  // Project the tangent along the roadside wall at eye-visible distances.
@@ -317,20 +344,38 @@ function forward(g){
 }
 function ledValue(value,whole){
  if(!Number.isFinite(value))return [' ----',''];
- const rounded=whole?Math.round(value):value,mag=Math.abs(rounded);
+ const rounded=value,mag=Math.abs(rounded);
  const sign=rounded<0?'−':' ';
  // Four coefficient digits, with a separate exponent register.
- if(mag>=9999.5||(!whole&&mag>0&&mag<.001)){
+ if(mag>=9999.5||(mag>0&&mag<(whole?.005:.001))){
   const [digits,power]=mag.toExponential(3).split('e');
   return [sign+digits,'E'+Number(power)]
  }
- if(whole)return [sign+String(mag).padStart(4,'0'),''];
+ if(whole){
+  const places=mag<99.995?2:mag<999.95?1:0;
+  return [sign+mag.toFixed(places).padStart(places?5:4,'0'),''];
+ }
  const decimals=Math.max(0,3-Math.max(0,Math.floor(Math.log10(mag||1))));
  const n=Number(mag.toFixed(decimals));
  const places=Math.max(0,4-String(Math.floor(n)).length);
  return [sign+n.toFixed(places),'']
 }
-function updateDial(v,i){const [digits,exp]=ledValue(v,i===0);$('m'+i).textContent=digits;$('e'+i).textContent=exp}
+const segmentShapes=['M2 1h6l1 1-1 1H2L1 2Z','M8 3l1-1 1 1v5l-1 1-1-1Z','M8 11l1-1 1 1v5l-1 1-1-1Z','M2 17h6l1 1-1 1H2l-1-1Z','M0 11l1-1 1 1v5l-1 1-1-1Z','M0 3l1-1 1 1v5L1 9 0 8Z','M2 9h6l1 1-1 1H2l-1-1Z'];
+const masks=[63,6,91,79,102,109,125,7,127,111];
+function updateDial(v,i){
+ const [digits,exp]=ledValue(v,i===0),el=$('m'+i);
+ if(el.dataset.digits!==digits){
+  el.dataset.digits=digits;let pos=0,paths='';
+  for(const ch of digits){
+   if(ch==='.'){paths+='<circle cx="'+(pos-1)+'" cy="18" r="1.1"/>';continue}
+   const mask=ch==='−'||ch==='-'?64:masks[ch]||0;
+   for(let n=0;n<7;n++)if(mask&(1<<n))paths+='<path transform="translate('+pos+')" d="'+segmentShapes[n]+'"/>';
+   pos+=13;
+  }
+  el.innerHTML='<svg aria-hidden="true" viewBox="0 0 66 20">'+paths+'</svg>';
+ }
+ $('d'+i).setAttribute('aria-label',digits.trim()+exp);$('e'+i).textContent=exp;
+}
 function displayValue(value,whole=false){
  if(!Number.isFinite(value))return '—';
  if(whole)return String(Math.round(value)||0);
